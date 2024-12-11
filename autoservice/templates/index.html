@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+  <h1>{% trans "Autoservice" %}</h1>
+  <p>{% trans "Welcome to autoservice" %}</p>
+  <p>{% trans "Today we have:" %}</p>
+  <ul>
+    <li><strong>{% trans "Have cars:" %}:</strong> {{ sum_cars }}</li>
+    <li><strong>{% trans "Available services" %}:</strong> {{ services }}</li>
+    <li><strong>{% trans "Orders done" %}:</strong> {{ sum_order }}</li>
+  </ul>
+
+<p>{% trans "Your visits:" %} {{ num_visits }}</p>
+{% endblock %}

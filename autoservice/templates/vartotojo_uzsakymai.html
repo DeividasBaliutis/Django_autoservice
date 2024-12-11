@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>Mano užsakymai</h1>
+    {% if order_list %}
+        {% for uzsakymas in order_list %}
+            <hr>
+            <ul>
+                {% if uzsakymas.customer.profilis.nuotrauka %}
+                    <img class="rounded-circle" src="{{ uzsakymas.customer.profilis.nuotrauka.url }}" width="100" height="75" alt="Profilio nuotrauka">
+                {% else %}
+                    <p>Profilio nuotrauka nėra.</p>
+                {% endif %}
+                <li>
+                    <strong class="{% if uzsakymas.is_overdue %}text-danger{% endif %}">
+                        Automobilis: {{ uzsakymas.car.license_plate }} - Būsena: {{ uzsakymas.get_status_display }}
+                    </strong>
+                </li>
+                <li>
+                    <strong>Gražinimo terminas:</strong> {{ uzsakymas.return_date }}
+                </li>
+                <br>
+                <a class="btn btn-primary" href="{% url 'mano-uzsakymas' uzsakymas.pk %}" role="button">{% trans "View" %}</a>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>Nėra užsakymų.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano užsakymai</h1>
+    {% if order_list %}
+        {% for uzsakymas in order_list %}
+    <hr>
+        <ul>
+
+        <img class="rounded-circle" src="{{uzsakymas.customer.profilis.nuotrauka.url}}" width="100" height="75">
+        <li><strong class="{% if uzsakymas.is_overdue %}text-danger{% endif %}">Užsakymas (ID: {{ uzsakymas.id }}) - Automobilis: {{ uzsakymas.car.license_plate }} - Būsena: {{ uzsakymas.get_status_display }}
+        <li><strong>Gražinimo terminas:</strong> {{uzsakymas.get_status_display}}</li>
+        <br/>
+        <a class="btn btn-primary" href="{{ uzsakymas.pk }}" role="button">Peržiūrėti</a>
+            </li>
+
+    </ul>
+{% endfor %}
+    {% else %}
+      <p>Nera uzsakymu.</p>
+    {% endif %}
+{% endblock %}
